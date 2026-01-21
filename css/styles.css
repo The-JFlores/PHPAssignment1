@@ -8,9 +8,21 @@ body {
     padding: 0;
 }
 
-/* Navigation links styling */
+/* Center header content */
+header {
+    text-align: center;  /* Center the text inside header */
+    padding: 20px 0;     /* Add vertical spacing */
+}
+
+/* Navigation styling */
+nav {
+    margin-top: 10px;
+}
+
+/* Center navigation links and add spacing */
 nav a {
-    margin-right: 15px;
+    margin: 0 15px;      /* Space between links */
+    display: inline-block;
     text-decoration: none;
     font-weight: bold;
 }
