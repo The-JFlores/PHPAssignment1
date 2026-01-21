@@ -1,0 +1,83 @@
+
+
+/* Basic reset and font */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ddd;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation links styling */
+nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Start link in green */
+.nav-start {
+    color: green;
+}
+
+/* Add Movie button style */
+.add-movie {
+    color: #e88607;
+}
+
+/* Add Movie hover effect */
+.add-movie:hover {
+    text-decoration: underline;
+}
+
+/* Center main content */
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+/* Table styles */
+table {
+    margin: 20px auto;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+table thead {
+    background-color: #f0f0f0;
+}
+
+table th, table td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Row hover effect */
+table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Delete button style */
+.delete-button {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.delete-button:hover {
+    text-decoration: underline;
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+    color: #666;
+}
