@@ -1,5 +1,3 @@
-
-
 <?php
 require('database.php');
 include('header.php');
@@ -23,6 +21,7 @@ $statement->closeCursor();
             <th>Director</th>
             <th>Release Year</th>
             <th>Rating</th>
+            <th>Status</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -35,9 +34,22 @@ $statement->closeCursor();
             <td><?= htmlspecialchars($movie['director']) ?></td>
             <td><?= htmlspecialchars($movie['releaseYear']) ?></td>
             <td><?= htmlspecialchars($movie['rating']) ?></td>
+
+            <td>
+                <?php if ($movie['status'] === 'Active'): ?>
+                    <strong style="color: green;">Active</strong>
+                <?php else: ?>
+                    <span style="color: red;">No active</span>
+                <?php endif; ?>
+            </td>
+
             <td>
                 <a href="edit_movie.php?id=<?= $movie['movieID'] ?>">Edit</a> | 
-                <a href="delete_movie.php?id=<?= $movie['movieID'] ?>" class="delete-button" onclick="return confirm('Are you sure you want to delete this movie?');">Delete</a>
+                <a href="delete_movie.php?id=<?= $movie['movieID'] ?>"
+                   class="delete-button"
+                   onclick="return confirm('Are you sure you want to delete this movie?');">
+                   Delete
+                </a>
             </td>
         </tr>
     <?php endforeach; ?>

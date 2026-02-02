@@ -1,5 +1,3 @@
-
-
 <?php
 require('database.php');
 
@@ -10,6 +8,11 @@ $genre = $_POST['genre'] ?? '';
 $director = $_POST['director'] ?? '';
 $releaseYear = $_POST['releaseYear'] ?? null;
 $rating = $_POST['rating'] ?? null;
+
+// Status from checkbox
+// If checkbox is checked → Active
+// If checkbox is not checked → No active
+$status = isset($_POST['status']) ? 'Active' : 'No active';
 
 // Redirect if no movieID
 if (!$movieID) {
@@ -23,7 +26,8 @@ $query = "UPDATE movies
               genre = :genre,
               director = :director,
               releaseYear = :releaseYear,
-              rating = :rating
+              rating = :rating,
+              status = :status
           WHERE movieID = :movieID";
 
 $statement = $db->prepare($query);
@@ -32,6 +36,7 @@ $statement->bindValue(':genre', $genre);
 $statement->bindValue(':director', $director);
 $statement->bindValue(':releaseYear', $releaseYear, PDO::PARAM_INT);
 $statement->bindValue(':rating', $rating);
+$statement->bindValue(':status', $status);
 $statement->bindValue(':movieID', $movieID, PDO::PARAM_INT);
 
 $statement->execute();

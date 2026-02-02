@@ -1,5 +1,3 @@
-
-
 <?php
 require('database.php');
 include('header.php');
@@ -31,22 +29,39 @@ if (!$movie) {
 <h2>Edit Movie</h2>
 
 <form action="process_edit.php" method="post">
-    <input type="hidden" name="movieID" value="<?= htmlspecialchars($movie['movieID']) ?>">
+    <input type="hidden" name="movieID" value="<?php echo htmlspecialchars($movie['movieID']); ?>">
 
     <label for="title">Title:</label><br>
-    <input type="text" id="title" name="title" value="<?= htmlspecialchars($movie['title']) ?>" required><br><br>
+    <input type="text" id="title" name="title"
+           value="<?php echo htmlspecialchars($movie['title']); ?>" required><br><br>
 
     <label for="genre">Genre:</label><br>
-    <input type="text" id="genre" name="genre" value="<?= htmlspecialchars($movie['genre']) ?>"><br><br>
+    <input type="text" id="genre" name="genre"
+           value="<?php echo htmlspecialchars($movie['genre']); ?>"><br><br>
 
     <label for="director">Director:</label><br>
-    <input type="text" id="director" name="director" value="<?= htmlspecialchars($movie['director']) ?>"><br><br>
+    <input type="text" id="director" name="director"
+           value="<?php echo htmlspecialchars($movie['director']); ?>"><br><br>
 
     <label for="releaseYear">Release Year:</label><br>
-    <input type="number" id="releaseYear" name="releaseYear" min="1900" max="2099" value="<?= htmlspecialchars($movie['releaseYear']) ?>"><br><br>
+    <input type="number" id="releaseYear" name="releaseYear"
+           min="1900" max="2099"
+           value="<?php echo htmlspecialchars($movie['releaseYear']); ?>"><br><br>
 
     <label for="rating">Rating (0.0 - 10.0):</label><br>
-    <input type="number" step="0.1" min="0" max="10" id="rating" name="rating" value="<?= htmlspecialchars($movie['rating']) ?>"><br><br>
+    <input type="number" step="0.1" min="0" max="10"
+           id="rating" name="rating"
+           value="<?php echo htmlspecialchars($movie['rating']); ?>"><br><br>
+
+           <input type="hidden" name="status" value="No active">
+
+    <!-- Status checkbox -->
+    <label>
+        <input type="checkbox" name="status" value="Active"
+            <?php if ($movie['status'] === 'Active') echo 'checked'; ?>>
+        Active
+    </label>
+    <br><br>
 
     <input type="submit" value="Update Movie">
 </form>
