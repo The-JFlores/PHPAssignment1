@@ -14,7 +14,7 @@ $posterPath = null;
 if (isset($_FILES['poster']) && $_FILES['poster']['error'] === UPLOAD_ERR_OK) {
     $fileTmpPath = $_FILES['poster']['tmp_name'];
     $fileName = basename($_FILES['poster']['name']);
-    $uploadDir = 'uploads/';  // Asegúrate que esta carpeta exista y tenga permisos
+    $uploadDir = 'images/';  // Asegúrate que esta carpeta exista y tenga permisos
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0755, true);
     }

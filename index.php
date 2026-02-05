@@ -38,8 +38,10 @@ $statement->closeCursor();
             <td><?= htmlspecialchars($movie['movieID']) ?></td>
 
             <td>
-                <?php if (!empty($movie['poster']) && file_exists($movie['poster'])): ?>
-                    <img src="<?= htmlspecialchars($movie['poster']) ?>" alt="Poster" style="width:60px; height:auto;">
+                <?php if (!empty($movie['poster'])): ?>
+                    <img src="<?= htmlspecialchars($movie['poster']) ?>" 
+                         alt="Poster" 
+                         style="width:60px; height:auto;">
                 <?php else: ?>
                     No image
                 <?php endif; ?>
@@ -62,10 +64,9 @@ $statement->closeCursor();
             <td>
                 <a href="edit_movie.php?id=<?= $movie['movieID'] ?>">Edit</a> | 
                 <a href="delete_movie.php?id=<?= $movie['movieID'] ?>"
-                   class="delete-button"
                    onclick="return confirm('Are you sure you want to delete this movie?');">
                    Delete
-                </a>
+                </a> |
                 <a href="movie_details.php?id=<?= $movie['movieID'] ?>">Details</a>
             </td>
         </tr>
