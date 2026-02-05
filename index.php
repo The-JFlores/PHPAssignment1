@@ -2,8 +2,14 @@
 require('database.php');
 include('header.php');
 
-// Fetch all movies ordered by movieID ascending
-$query = 'SELECT * FROM movies ORDER BY movieID ASC';
+// Consulta con JOIN para traer género y poster
+$query = "
+SELECT m.*, g.name AS genre
+FROM movies m
+LEFT JOIN movie_genres mg ON m.movieID = mg.movieID
+LEFT JOIN genres g ON mg.genreID = g.genreID
+ORDER BY m.movieID ASC";
+
 $statement = $db->prepare($query);
 $statement->execute();
 $movies = $statement->fetchAll();
@@ -16,6 +22,7 @@ $statement->closeCursor();
     <thead>
         <tr>
             <th>ID</th>
+            <th>Poster</th>
             <th>Title</th>
             <th>Genre</th>
             <th>Director</th>
@@ -29,8 +36,17 @@ $statement->closeCursor();
     <?php foreach ($movies as $movie): ?>
         <tr>
             <td><?= htmlspecialchars($movie['movieID']) ?></td>
+
+            <td>
+                <?php if (!empty($movie['poster']) && file_exists($movie['poster'])): ?>
+                    <img src="<?= htmlspecialchars($movie['poster']) ?>" alt="Poster" style="width:60px; height:auto;">
+                <?php else: ?>
+                    No image
+                <?php endif; ?>
+            </td>
+
             <td><?= htmlspecialchars($movie['title']) ?></td>
-            <td><?= htmlspecialchars($movie['genre']) ?></td>
+            <td><?= htmlspecialchars($movie['genre'] ?? 'No genre') ?></td>
             <td><?= htmlspecialchars($movie['director']) ?></td>
             <td><?= htmlspecialchars($movie['releaseYear']) ?></td>
             <td><?= htmlspecialchars($movie['rating']) ?></td>
@@ -50,6 +66,7 @@ $statement->closeCursor();
                    onclick="return confirm('Are you sure you want to delete this movie?');">
                    Delete
                 </a>
+                <a href="movie_details.php?id=<?= $movie['movieID'] ?>">Details</a>
             </td>
         </tr>
     <?php endforeach; ?>
