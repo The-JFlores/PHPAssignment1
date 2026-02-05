@@ -10,7 +10,7 @@ if (!$id) {
     exit();
 }
 
-// Consulta para traer la película con género
+// Query to fetch the movie with its genre
 $query = "
 SELECT m.*, g.name AS genre
 FROM movies m

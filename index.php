@@ -2,7 +2,7 @@
 require('database.php');
 include('header.php');
 
-// Consulta con JOIN para traer género y poster
+// Query with JOIN to fetch genre and poster
 $query = "
 SELECT m.*, g.name AS genre
 FROM movies m
