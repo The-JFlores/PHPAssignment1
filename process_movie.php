@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 // Debugging upload - remove after confirming it works
 // echo '<pre>';
 // print_r($_FILES);
