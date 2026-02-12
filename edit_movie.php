@@ -28,7 +28,7 @@ if (!$movie) {
 
 <h2>Edit Movie</h2>
 
-<form action="process_edit.php" method="post">
+<form action="process_edit.php" method="post" enctype="multipart/form-data">
     <input type="hidden" name="movieID" value="<?php echo htmlspecialchars($movie['movieID']); ?>">
 
     <label for="title">Title:</label><br>
@@ -67,3 +67,11 @@ if (!$movie) {
 </form>
 
 <?php include('footer.php'); ?>
+    <label for="image">Image:</label><br>
+    <input type="file" id="image" name="image" accept="image/*"><br>
+    <?php if (!empty($movie['image'])): ?>
+        <img src="<?php echo htmlspecialchars($movie['image']); ?>" alt="Current Image" style="max-width: 200px; max-height: 200px;"><br>
+    <?php else: ?>
+        <img src="placeholder.png" alt="No Image" style="max-width: 200px; max-height: 200px;"><br>
+    <?php endif; ?>
+    <br>

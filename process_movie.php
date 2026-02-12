@@ -18,7 +18,7 @@ $rating = $_POST['rating'] ?? null;
 $status = $_POST['status'] ?? 'No active';
 
 // Handle uploaded image
-$posterPath = null;
+$posterPath = 'images/avatar.png'; // Default placeholder image
 if (isset($_FILES['poster']) && $_FILES['poster']['error'] === UPLOAD_ERR_OK) {
     $fileTmpPath = $_FILES['poster']['tmp_name'];
     $fileName = basename($_FILES['poster']['name']);

@@ -61,14 +61,15 @@ $statement->closeCursor();
                 <?php endif; ?>
             </td>
 
-            <td>
-                <a href="edit_movie.php?id=<?= $movie['movieID'] ?>">Edit</a> | 
-                <a href="delete_movie.php?id=<?= $movie['movieID'] ?>"
-                   onclick="return confirm('Are you sure you want to delete this movie?');">
-                   Delete
-                </a> |
-                <a href="movie_details.php?id=<?= $movie['movieID'] ?>">Details</a>
-            </td>
+          <td>
+    <a href="edit_movie.php?id=<?= $movie['movieID'] ?>">Edit</a> | 
+    <a href="delete_movie.php?id=<?= $movie['movieID'] ?>"
+       class="delete-button"
+       onclick="return confirm('Are you sure you want to delete this movie?');">
+       Delete
+    </a> | 
+    <a href="movie_details.php?id=<?= $movie['movieID'] ?>">Details</a>
+</td>
         </tr>
     <?php endforeach; ?>
     </tbody>
