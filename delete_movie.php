@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Redirect user if not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -8,36 +9,44 @@ if (!isset($_SESSION['user_id'])) {
 
 require('database.php');
 
+// Get movie ID from URL
 $id = $_GET['id'] ?? null;
 
 if ($id) {
 
-    // 1️⃣ Get the poster path before deleting
+    // 1️⃣ Retrieve the poster filename from the database
     $query = "SELECT poster FROM movies WHERE movieID = :id";
     $statement = $db->prepare($query);
     $statement->bindValue(':id', $id, PDO::PARAM_INT);
     $statement->execute();
-    $movie = $statement->fetch();
+    $movie = $statement->fetch(PDO::FETCH_ASSOC);
     $statement->closeCursor();
 
-    if ($movie && !empty($movie['poster'])) {
+    if ($movie) {
 
-        $posterPath = $movie['poster'];
+        $poster = $movie['poster'];
 
-        // 2️⃣ Do not delete placeholder image
-        if (basename($posterPath) !== 'avatar.png' && file_exists($posterPath)) {
-            unlink($posterPath);
+        // 2️⃣ Delete the image file from the server
+        // Only delete if it is NOT the default placeholder
+        if (!empty($poster) && $poster !== 'avatar.png') {
+
+            $filePath = __DIR__ . '/images/' . $poster;
+
+            // Check if file exists before attempting deletion
+            if (file_exists($filePath)) {
+                unlink($filePath); // Remove file from server
+            }
         }
-    }
 
-    // 3️⃣ Delete movie from database
-    $query = 'DELETE FROM movies WHERE movieID = :id';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':id', $id, PDO::PARAM_INT);
-    $statement->execute();
-    $statement->closeCursor();
+        // 3️⃣ Delete the movie record from the database
+        $deleteQuery = "DELETE FROM movies WHERE movieID = :id";
+        $deleteStatement = $db->prepare($deleteQuery);
+        $deleteStatement->bindValue(':id', $id, PDO::PARAM_INT);
+        $deleteStatement->execute();
+        $deleteStatement->closeCursor();
+    }
 }
 
-// 4️⃣ Redirect
+// Redirect back to movie list after deletion
 header('Location: index.php');
 exit();
