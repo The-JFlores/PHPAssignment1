@@ -1,0 +1,6 @@
+# Ignore dynamic uploaded images
+images/img_*
+
+# Ignore OS files
+.DS_Store
+
